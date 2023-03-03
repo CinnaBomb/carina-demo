@@ -32,4 +32,38 @@ public class FacebookLoginPage extends AbstractPage{
         super(driver);
         setPageAbsoluteURL("facebook.com");
     }
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public WebElement getEmailOrPhoneInput() {
+		return emailOrPhoneInput;
+	}
+
+	public WebElement getPasswordInput() {
+		return passwordInput;
+	}
+
+	public WebElement getLogInButton() {
+		return logInButton;
+	}
+
+	public WebElement getForgotPasswordLink() {
+		return forgotPasswordLink;
+	}
+
+	public WebElement getCreateNewAccountButton() {
+		return createNewAccountButton;
+	}
+
+	public WebElement getCreateAPageLink() {
+		return createAPageLink;
+	}
+    
+    
 }

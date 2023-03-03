@@ -1,6 +1,9 @@
 package com.qaprosoft.carina.demo;
 
 import org.testng.annotations.Test;
+
+import com.qaprosoft.carina.demo.gui.pages.FacebookMainActivityPage;
+
 import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,10 +40,9 @@ public class FacebookLoginSampleTest {
         	 LOGGER.error(e);
         }
 
+        FacebookMainActivityPage facebookMainActivityPage = new FacebookMainActivityPage(driver);
         // Verify that the user is logged in
-        String expectedTitle = "Facebook";
-        String actualTitle = driver.getTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);
+        Assert.assertTrue(facebookMainActivityPage.getYourProfileIconButton().isDisplayed());
 
         LOGGER.info("User successfully logged in to Facebook!");
 

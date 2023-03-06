@@ -6,46 +6,85 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
-public class FacebookLoginPage extends AbstractPage{
+public class FacebookLoginPage extends AbstractPage {
 
-    private WebDriver driver;
+	private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id='email']")
-    private ExtendedWebElement emailOrPhoneInput;
+	@FindBy(xpath = "//*[@id='email']")
+	private ExtendedWebElement emailOrPhoneInput;
 
-    @FindBy(xpath = "//*[@id='pass']")
-    private ExtendedWebElement passwordInput;
+	@FindBy(xpath = "//*[@id='pass']")
+	private ExtendedWebElement passwordInput;
 
-    @FindBy(xpath = "//button[@name='login']")
-    private ExtendedWebElement logInButton;
+	@FindBy(xpath = "//button[@name='login']")
+	private ExtendedWebElement logInButton;
 
-    @FindBy(xpath = "//a[text()='Forgot password?']")
-    private ExtendedWebElement forgotPasswordLink;
+	@FindBy(xpath = "//a[text()='Forgot password?']")
+	private ExtendedWebElement forgotPasswordLink;
 
-    @FindBy(xpath = "//a[@data-testid='open-registration-form-button']")
-    private ExtendedWebElement createNewAccountButton;
+	@FindBy(xpath = "//a[@data-testid='open-registration-form-button']")
+	private ExtendedWebElement createNewAccountButton;
 
-    @FindBy(xpath = "//a[text()='Create a Page']")
-    private ExtendedWebElement createAPageLink;
+	@FindBy(xpath = "//a[text()='Create a Page']")
+	private ExtendedWebElement createAPageLink;
 
-    public FacebookLoginPage(WebDriver driver) {
-        super(driver);
-        setPageAbsoluteURL("facebook.com");
-    }
-    
-    public FacebookMainActivityPage login(String login, String password) {
-    	emailOrPhoneInput.click();
-    	emailOrPhoneInput.getElement().sendKeys(login);
-    	passwordInput.click();
-    	passwordInput.getElement().sendKeys(password);
-    	logInButton.click();
-        FacebookMainActivityPage facebookMainActivityPage = new FacebookMainActivityPage(driver);
-        facebookMainActivityPage.isPageOpened();
-    	return facebookMainActivityPage;
-    }
+	public FacebookLoginPage(WebDriver driver) {
+		super(driver);
+		setPageAbsoluteURL("facebook.com");
+	}
 
-    @Override
-    public boolean isPageOpened() {
-        return emailOrPhoneInput.isPresent() && logInButton.isPresent();
-    }
+	public FacebookMainActivityPage login(String login, String password) {
+		emailOrPhoneInput.click();
+		emailOrPhoneInput.getElement().sendKeys(login);
+		passwordInput.click();
+		passwordInput.getElement().sendKeys(password);
+		logInButton.click();
+		FacebookMainActivityPage facebookMainActivityPage = new FacebookMainActivityPage(driver);
+		facebookMainActivityPage.isPageOpened();
+		return facebookMainActivityPage;
+	}
+
+	@Override
+	public boolean isPageOpened() {
+		return emailOrPhoneInput.isPresent() && logInButton.isPresent();
+	}
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public ExtendedWebElement getEmailOrPhoneInput() {
+		return emailOrPhoneInput;
+	}
+
+	public ExtendedWebElement getPasswordInput() {
+		return passwordInput;
+	}
+
+	public ExtendedWebElement getLogInButton() {
+		return logInButton;
+	}
+
+	public ExtendedWebElement getForgotPasswordLink() {
+		return forgotPasswordLink;
+	}
+
+	public ExtendedWebElement getCreateNewAccountButton() {
+		return createNewAccountButton;
+	}
+
+	public ExtendedWebElement getCreateAPageLink() {
+		return createAPageLink;
+	}
+
+	public FindYourAccountPage clickForgotPasswordLink() {
+		forgotPasswordLink.click();
+		return new FindYourAccountPage(driver);
+	}
+
+	public CreateAPagePage clickCreateAPageLink() {
+		createAPageLink.click();
+		return new CreateAPagePage(driver);
+	}
+
 }

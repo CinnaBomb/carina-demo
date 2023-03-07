@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
@@ -37,7 +38,7 @@ public class AolSampleTest extends AbstractTest {
         LeftNavMenuComponent leftNavMenuComponent = new LeftNavMenuComponent(driver);
         leftNavMenuComponent.getMailLink().click();
         AolSignInPage signInPage = homePage.getLeftNavMenuComponent().clickMailLink();
-        signInPage.isPageOpened();
+        Assert.assertTrue(signInPage.isPageOpened(), "AolSignInPage not opened.");
         LOGGER.info("AolSignInPage opened successfully!");
         driver.quit();
     }
@@ -49,7 +50,7 @@ public class AolSampleTest extends AbstractTest {
         homePage.open();
         homePage.getTitleBarComponent().getProfileLoginJoinButton().click();
         AolSignInPage signInPage = new AolSignInPage(driver);
-        signInPage.isPageOpened();
+        Assert.assertTrue(signInPage.isPageOpened(), "AolSignInPage not opened.");
         LOGGER.info("AolSignInPage opened successfully!");
         driver.quit();
     }
@@ -60,7 +61,7 @@ public class AolSampleTest extends AbstractTest {
         homePage.open();
         homePage.getTitleBarComponent().getMailIcon().click();
         AolSignInPage signInPage = new AolSignInPage(driver);
-        signInPage.isPageOpened();
+        Assert.assertTrue(signInPage.isPageOpened(), "AolSignInPage not opened.");
         LOGGER.info("AolSignInPage opened successfully!");
         driver.quit();
     }

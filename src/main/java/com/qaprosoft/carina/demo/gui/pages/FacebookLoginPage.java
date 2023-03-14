@@ -5,43 +5,40 @@ import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.zebrunner.carina.utils.Configuration;
 
 public class FacebookLoginPage extends AbstractPage {
 
-	private WebDriver driver;
-
-	@FindBy(xpath = "//*[@id='email']")
+	@FindBy(id="email")
 	private ExtendedWebElement emailOrPhoneInput;
 
-	@FindBy(xpath = "//*[@id='pass']")
+	@FindBy(id="pass")
 	private ExtendedWebElement passwordInput;
 
-	@FindBy(xpath = "//button[@name='login']")
+	@FindBy(name="login")
 	private ExtendedWebElement logInButton;
 
-	@FindBy(xpath = "//a[text()='Forgot password?']")
+	@FindBy(linkText="Forgot password?")
 	private ExtendedWebElement forgotPasswordLink;
 
 	@FindBy(xpath = "//a[@data-testid='open-registration-form-button']")
 	private ExtendedWebElement createNewAccountButton;
 
-	@FindBy(xpath = "//a[text()='Create a Page']")
+	@FindBy(linkText="Create a Page")
 	private ExtendedWebElement createAPageLink;
 
 	public FacebookLoginPage(WebDriver driver) {
 		super(driver);
-		setPageAbsoluteURL("facebook.com");
+		setPageAbsoluteURL(Configuration.getEnvArg("base"));
 	}
 
 	public FacebookMainActivityPage login(String login, String password) {
 		emailOrPhoneInput.click();
-		emailOrPhoneInput.getElement().sendKeys(login);
+		emailOrPhoneInput.type(login);
 		passwordInput.click();
-		passwordInput.getElement().sendKeys(password);
+		passwordInput.type(password);
 		logInButton.click();
-		FacebookMainActivityPage facebookMainActivityPage = new FacebookMainActivityPage(driver);
-		facebookMainActivityPage.isPageOpened();
-		return facebookMainActivityPage;
+		return new FacebookMainActivityPage(getDriver());
 	}
 
 	@Override
@@ -49,42 +46,14 @@ public class FacebookLoginPage extends AbstractPage {
 		return emailOrPhoneInput.isPresent() && logInButton.isPresent();
 	}
 
-	public WebDriver getDriver() {
-		return driver;
-	}
-
-	public ExtendedWebElement getEmailOrPhoneInput() {
-		return emailOrPhoneInput;
-	}
-
-	public ExtendedWebElement getPasswordInput() {
-		return passwordInput;
-	}
-
-	public ExtendedWebElement getLogInButton() {
-		return logInButton;
-	}
-
-	public ExtendedWebElement getForgotPasswordLink() {
-		return forgotPasswordLink;
-	}
-
-	public ExtendedWebElement getCreateNewAccountButton() {
-		return createNewAccountButton;
-	}
-
-	public ExtendedWebElement getCreateAPageLink() {
-		return createAPageLink;
-	}
-
 	public FindYourAccountPage clickForgotPasswordLink() {
 		forgotPasswordLink.click();
-		return new FindYourAccountPage(driver);
+		return new FindYourAccountPage(getDriver());
 	}
 
 	public CreateAPagePage clickCreateAPageLink() {
 		createAPageLink.click();
-		return new CreateAPagePage(driver);
+		return new CreateAPagePage(getDriver());
 	}
 
 }

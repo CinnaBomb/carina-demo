@@ -16,11 +16,8 @@ public class CreateAPagePage extends AbstractPage{
     }
 
     public boolean isPageOpened() {
-        return createAPageHeader.isElementPresent();
+        return createAPageHeader.isPresent();
     }
-
-    public ExtendedWebElement getCreateAPageHeader() {
-        return createAPageHeader;
-    }
+    
 }
 

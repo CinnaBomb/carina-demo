@@ -1,42 +1,35 @@
 package com.qaprosoft.carina.demo.gui.pages.components;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.qaprosoft.carina.core.gui.AbstractUIObject;
 
-public class TitleBarComponent extends AbstractPage {
+public class TitleBarComponent extends AbstractUIObject implements SearchContext {
 
-    @FindBy(xpath = "//div[@class='title-bar']//input[@id='header-form-search-input']")
+    @FindBy(xpath = "//input[@id='header-form-search-input']")
     private ExtendedWebElement searchTextInput;
 
-    @FindBy(xpath = "//div[@class='title-bar']//button[@id='header-form-search-button']")
+    @FindBy(xpath = "//button[@id='header-form-search-button']")
     private ExtendedWebElement searchIconButton;
 
-    @FindBy(xpath = "//div[@class='title-bar']//div[contains(@class, 'aol-support-button')]")
+    @FindBy(xpath = "//div[contains(@class, 'aol-support-button')]")
     private ExtendedWebElement phoneIconButton;
 
-    @FindBy(xpath = "//div[@class='title-bar']//a[@class='profile-button']/span[contains(text(),'Login / Join')]")
+    @FindBy(xpath = "//a[@class='profile-button']/span[contains(text(),'Login / Join')]")
     private ExtendedWebElement profileLoginJoinButton;
 
-    @FindBy(xpath = "//div[@class='title-bar']//*[@title='mail icon']")
+    @FindBy(xpath = "//*[@title='mail icon']")
     private ExtendedWebElement mailIcon;
 
-    public TitleBarComponent(WebDriver driver) {
-        super(driver);
-    }
-
-    public ExtendedWebElement getSearchTextInput() {
-        return searchTextInput;
-    }
-
-    public ExtendedWebElement getSearchIconButton() {
-        return searchIconButton;
-    }
-
-    public ExtendedWebElement getPhoneIconButton() {
-        return phoneIconButton;
+    public TitleBarComponent(WebDriver driver, SearchContext searchContext) {
+        super(driver, searchContext);
     }
 
     public ExtendedWebElement getProfileLoginJoinButton() {
@@ -48,12 +41,22 @@ public class TitleBarComponent extends AbstractPage {
     }
 
     public boolean isPresent() {
-        return getSearchTextInput().isElementPresent() &&
-                getSearchIconButton().isElementPresent() &&
-                getPhoneIconButton().isElementPresent() &&
-                getProfileLoginJoinButton().isElementPresent() &&
-                getMailIcon().isElementPresent();
+        return searchTextInput.isPresent() &&
+                searchIconButton.isPresent() &&
+                phoneIconButton.isPresent() &&
+                profileLoginJoinButton.isPresent() &&
+                mailIcon.isPresent();
     }
+
+	@Override
+	public List<WebElement> findElements(By by) {
+		return null;
+	}
+
+	@Override
+	public WebElement findElement(By by) {
+		return null;
+	}
 
 
 }

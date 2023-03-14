@@ -1,8 +1,0 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite verbose="1" name="Carina Demo Tests - JsonPlaceholder API Sample" parallel="methods">
-  <test name="JsonPlaceholder API tests">
-      <classes>
-          <class name="com.qaprosoft.carina.demo.api.jsonplaceholder.GETTest" />
-      </classes>
-  </test>
-</suite>
